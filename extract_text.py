@@ -1,8 +1,4 @@
 import json
-from pprint import pprint
-
-with open('test.json', 'r', encoding='utf8') as file:
-    data = json.load(file)
 
 def extract_text(data, results=None):
     if results is None:
@@ -27,8 +23,12 @@ def extract_text(data, results=None):
                             results.append({'type': content['type'], 'text': item['text']})
     return results
 
-text_elements = extract_text(data)
+if __name__ == "__main__":
+    with open('test_updated.json', 'r', encoding='utf8') as file:
+        data = json.load(file)
 
-for element in text_elements:
-    pprint(element)
-    # print(f"Type: {element['type']}, Text: {element['text']}")
+    text_elements = extract_text(data)
+
+    for element in text_elements:
+        print(element)
+        # print(f"Type: {element['type']}, Text: {element['text']}")
