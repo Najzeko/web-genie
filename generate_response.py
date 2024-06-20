@@ -9,7 +9,6 @@ OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 client = OpenAI(api_key=OPENAI_API_KEY)
 
 def generate_response(existing_context, existing_text, new_context):
-    # messages = [{"role": m["role"], "content": m["content"]} for m in message_history]
     messages = []
     messages.insert(0, {
         "role": "system", 
@@ -51,10 +50,11 @@ def generate_response(existing_context, existing_text, new_context):
         Existing text: {existing_text}
         New context: {new_context}"""})
     response = client.chat.completions.create(
-                model="gpt-3.5-turbo",
-                # model="gpt-3.5-turbo-0125",
+                # model="gpt-3.5-turbo",
+                model="gpt-3.5-turbo-0125",
                 # model="gpt-4o",
-                messages=messages
+                messages=messages,
+                # temperature=0.3
             )
     return response.choices[0].message.content
 
