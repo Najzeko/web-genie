@@ -24,11 +24,19 @@ def extract_text(data, results=None):
     return results
 
 if __name__ == "__main__":
-    with open('test_updated.json', 'r', encoding='utf8') as file:
-        data = json.load(file)
+    filename = input("Enter the filename to extract text from: ")
 
-    text_elements = extract_text(data)
+    try:
+        with open(filename, 'r', encoding='utf8') as file:
+            data = json.load(file)
 
-    for element in text_elements:
-        print(element)
-        # print(f"Type: {element['type']}, Text: {element['text']}")
+        text_elements = extract_text(data)
+
+        print("Extracted Text Elements:")
+        for element in text_elements:
+            print(element)
+            # print(f"Type: {element['type']}, Text: {element['text']}")
+    except FileNotFoundError:
+        print(f"File {filename} not found.")
+    except json.JSONDecodeError:
+        print(f"Error decoding JSON from file {filename}.")
